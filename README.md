@@ -1,5 +1,8 @@
 # Livesplit-AutoTimers-BOIII's-Client
 
+#Make sure you have STEAM closed in order to make the timer to work!
+For some reasons the timer won't work if steam is open
+
 # SETUP:
 Open LiveSplit > Right Click > Edit Layout > + > Control > Scriptable Auto Splitter
 
