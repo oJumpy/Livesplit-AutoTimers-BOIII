@@ -1,6 +1,6 @@
 # Livesplit-AutoTimers-BOIII's-Client
 
-#Make sure you have STEAM closed in order to make the timer to work!
+# Make sure you have STEAM closed in order to make the timer to work!
 For some reasons the timer won't work if steam is open
 
 # SETUP:
