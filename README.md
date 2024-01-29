@@ -1,7 +1,7 @@
 # Livesplit-AutoTimers-BOIII's-Client
 
-# Make sure you have STEAM closed and that the .exe of boiii client is just "boiii" in order to make the timer to work!
-For some reasons the timer won't work if steam is open
+# Make sure you have Steam closed, and that the .exe file for the BOIII client is named just "boiii" in order for the timer to work!
+The timer won't work if these steps are not followed
 
 # SETUP:
 Open LiveSplit > Right Click > Edit Layout > + > Control > Scriptable Auto Splitter
