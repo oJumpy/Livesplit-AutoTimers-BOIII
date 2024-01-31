@@ -15,3 +15,6 @@ Open LiveSplit > Right Click > Edit Layout > + > Control > Scriptable Auto Split
 
 # CREDITS:
 Scrappy (https://github.com/Joshr520), Riot and Chris4a4
+
+# HOW DARKNESS TIMER WORKS:
+Darkness will occur, when the timer hits 58 hours and 6mins ~ (the timer will go faster or slower depending on what fps you are using, so it won't act like real time )
