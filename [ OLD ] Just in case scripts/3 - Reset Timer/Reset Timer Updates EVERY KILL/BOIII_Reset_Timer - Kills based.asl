@@ -3,13 +3,23 @@ state("boiii", "blackops3")
 	int resetTime : "blackops3.exe", 0x176F9358;
 	int levelTime : "blackops3.exe", 0xA5502C0;
 	int round : "blackops3.exe", 0xA55BDEC;
-	byte is_paused : "blackops3.exe", 0x347EE08; 
+	byte zombie_killed : "blackops3.exe", 0x4A115A8; 
 	string13 currentMap : "blackops3.exe", 0x940C5E8;
+}
+
+init
+{
+	refreshRate = 100;
+	vars.startTime = current.levelTime;
+	vars.startReset = current.resetTime;
+	
+	vars.elapsedReset = 9999999;
+	vars.elapsedTime = 1;
 }
 
 update
 {
-	if(old.round < current.round)
+	if(old.zombie_killed == 0 && current.zombie_killed == 1)
 	{
 		vars.elapsedTime = vars.startTime - current.levelTime;
 		vars.elapsedReset = vars.startReset - current.resetTime;
@@ -33,16 +43,6 @@ gameTime
 	vars.resetPerTick = vars.elapsedReset / vars.elapsedTime;
 	vars.ticksLeft = (2147483647.0 - current.resetTime) / vars.resetPerTick;
 	return new TimeSpan(0, 0, 0, 0, (int)(vars.ticksLeft * 50));
-}
-
-init
-{
-	refreshRate = 100;
-	vars.startTime = current.levelTime;
-	vars.startReset = current.resetTime;
-	
-	vars.elapsedReset = 9999999;
-	vars.elapsedTime = 1;
 }
 
 start

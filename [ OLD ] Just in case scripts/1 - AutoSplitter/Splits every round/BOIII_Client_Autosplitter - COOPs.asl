@@ -1,21 +1,12 @@
-state("boiii", "blackops3")
+state("boiii")
 {
     byte round_counter : "blackops3.exe", 0xA55BDEC;
     byte is_paused : "blackops3.exe", 0x347EE08; 
-    string13 map_name : "blackops3.exe", 0x179E1840;
-}
-
-state("boiii_ez")
-{
-    byte round_counter : "blackops3.exe", 0xA55BDEC;
-    byte is_paused : "blackops3.exe", 0x347EE08; 
-    string13 map_name : "blackops3.exe", 0x179E1840;
 }
 
 startup
 {
     vars.timer_start = 0;
-    vars.round_splits = new int[] {5, 10, 15, 20, 25, 30, 50, 70, 100};
     vars.split_index = 1;
 }
 
@@ -53,12 +44,3 @@ split
         return true;
     }
 }
-
-/*split
-{
-    if(current.round_counter == vars.round_splits[vars.split_index])
-    {
-        vars.split_index++;
-        return true;
-    }
-}*/

@@ -3,22 +3,12 @@ state("boiii", "blackops3")
 	int resetTime : "blackops3.exe", 0x176F9358;
 	int levelTime : "blackops3.exe", 0xA5502C0;
 	int round : "blackops3.exe", 0xA55BDEC;
-	byte is_paused : "blackops3.exe", 0x4A115A8; 
 	string13 currentMap : "blackops3.exe", 0x940C5E8;
-}
-
-state("blackops3")
-{
-	int resetTime : 0x176F9358;
-	int levelTime : 0xA5502C0;
-	int round : 0xA55BDEC;
-	byte is_paused : 0x347EE08; 
-	string13 currentMap : 0x940C5E8;
 }
 
 update
 {
-	if(old.is_paused == 0 && current.is_paused == 1)
+	if(old.round < current.round)
 	{
 		vars.elapsedTime = vars.startTime - current.levelTime;
 		vars.elapsedReset = vars.startReset - current.resetTime;
@@ -46,7 +36,7 @@ gameTime
 
 init
 {
-	refreshRate = 50;
+	refreshRate = 100;
 	vars.startTime = current.levelTime;
 	vars.startReset = current.resetTime;
 	

@@ -1,8 +1,8 @@
-# Livesplit-AutoTimers-BOIII
+# old README
+# Livesplit-AutoTimers-BOIII's-Client
 
 # Make sure you have Steam closed, and that the .exe file for the BOIII client is named just "boiii" in order for the timer to work!
 The timer won't work if these steps are not followed
-I think i've fixed this with the latest version, but seems somewhat inconsistent.
 
 # SETUP:
 Open LiveSplit > Right Click > Edit Layout > + > Control > Scriptable Auto Splitter
@@ -15,5 +15,7 @@ Open LiveSplit > Right Click > Edit Layout > + > Control > Scriptable Auto Split
 -Use Detailed Timer
 
 # CREDITS:
-Scrappy (https://github.com/Joshr520) = Auto-splitter script for coops
-Riot and Chris4a4 = Old Game Timer, Round Timer, Reset Timer, and Trap Timer, which served as base for many of my scripts
+Scrappy (https://github.com/Joshr520), Riot and Chris4a4
+
+# HOW DARKNESS TIMER WORKS:
+Darkness will occur, when the timer hits 58 hours and 6mins ~ (the timer will go faster or slower depending on what fps you are using, so it won't act like real time )
