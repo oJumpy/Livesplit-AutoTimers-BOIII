@@ -15,5 +15,6 @@ Open LiveSplit > Right Click > Edit Layout > + > Control > Scriptable Auto Split
 -Use Detailed Timer
 
 # CREDITS:
-Scrappy (https://github.com/Joshr520) = Auto-splitter script for coops
-Riot and Chris4a4 = Old Game Timer, Round Timer, Reset Timer, and Trap Timer, which served as base for many of my scripts
+-Scrappy (https://github.com/Joshr520) = Auto-splitter script for coops
+
+-Riot and Chris4a4 = Old Game Timer, Round Timer, Reset Timer, and Trap Timer, which served as base for many of my scripts
