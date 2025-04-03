@@ -3,7 +3,9 @@ A multi-functional LiveSplit script for Call of Duty: Black Ops 3 Zombies.
 
 If you encounter any issues, please DM me on Discord: `ojumpy`
 
-# [Download](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/V3.0/Black-Ops-3-Master.asl)
+# [Download](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.1/Black-Ops-3-Master.asl)
+
+[DOA Version download](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/V3.0/Black-Ops-3-Master.DOA.asl)
 
 ## Setup
 1. Right Click LiveSplit → Edit Layout → `+` button → Control → Scriptable Auto Splitter → Browse to `Black-Ops-3-Master.asl` and select it.
@@ -24,6 +26,9 @@ If you encounter any issues, please DM me on Discord: `ojumpy`
 If you are going to make your own layout, make sure your LiveSplit is comparing against `Game Time` for everything. This includes `Subsplits`, `Splits`, `Timer`, `Detailed Timer`, etc.
 
 For `Timing Method`, I recommend using `Current Timing Method`.
+
+## Coming Soon
+- Box hit tracker for all maps, I already got all the addresses, just need to apply the logic.
 
 ## Credits
 - [Scrappy](https://github.com/Joshr520): Previous auto splitter script for coops.
