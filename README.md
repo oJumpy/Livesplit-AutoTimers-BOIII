@@ -33,3 +33,16 @@ For `Timing Method`, I recommend using `Current Timing Method`.
 ## Credits
 - [Scrappy](https://github.com/Joshr520): Previous auto splitter script for coops.
 - [Riot](https://twitch.tv/riot) and Chris4a4: Old Game Timer, Round Timer, Reset Timer, and Trap Timer, which served as base for many of the previous scripts.
+
+
+## Known Issues
+> [!CAUTION]
+> These are some known issues with the timer, and will be fixed in the future.
+
+### Saving layouts
+If you save your layout, with some settings enable you will encounter issues. Example:
+- Duplicates Reset options and more.
+### Solution
+Save your layout only when you first loaded the script or click on `Reset to default` in the bottom right in `Scriptable Auto Splitter`, then save.
+I recommend to never save your layout whenever you enable additional settings.
+
