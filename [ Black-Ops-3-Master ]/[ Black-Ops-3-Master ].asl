@@ -10,8 +10,19 @@ state("blackops3", "BO3 Steam")
         int fixedoffsetDarkness : 0x10;
     int BoxHitsMoon : 0x47CAB3C;
     int BoxHitsNacht : 0x47CB2E4;
+    int BoxHitsVerruckt1 : 0x47CBF24;
+    int BoxHitsVerruckt2 : 0x47CD61C;
+    int BoxHitsVerruckt3 : 0x47CC3BC;
+    int BoxHitsVerruckt4 : 0x47CC234;
+    int BoxHitsVerruckt5 : 0x47CC0AC;
     byte36 trapData : 0xA55BDF1;
     byte flogger : 0x4713774;
+    int entity : 0x176F9B98;
+    int RagsSlams : 0x36751E0;
+    byte8 childStructPtr : 0x51A3580;
+    int LevelNumEnt : 0xA549DF4;
+    int currentWeaponID : 0xA50D9C0;
+    int BoxWeaponID : 0x195F80B8;
 }
 
 state("boiii", "BOIII Client")
@@ -26,8 +37,75 @@ state("boiii", "BOIII Client")
         int fixedoffsetDarkness : "blackops3.exe", 0x10;
     int BoxHitsMoon : "blackops3.exe", 0x47CAB3C;
     int BoxHitsNacht : "blackops3.exe", 0x47CB2E4;
+    int BoxHitsVerruckt1 : "blackops3.exe", 0x47CBF24;
+    int BoxHitsVerruckt2 : "blackops3.exe", 0x47CD61C;
+    int BoxHitsVerruckt3 : "blackops3.exe", 0x47CC3BC;
+    int BoxHitsVerruckt4 : "blackops3.exe", 0x47CC234;
+    int BoxHitsVerruckt5 : "blackops3.exe", 0x47CC0AC;
     byte36 trapData : "blackops3.exe", 0xA55BDF1;
     byte flogger : "blackops3.exe", 0x4713774;
+    int entity : "blackops3.exe", 0x176F9B98;
+    int RagsSlams : "blackops3.exe", 0x36751E0;
+    byte8 childStructPtr : "blackops3.exe", 0x51A3580;
+    int LevelNumEnt : "blackops3.exe", 0xA549DF4;
+    int currentWeaponID : "blackops3.exe", 0xA50D9C0;
+    int BoxWeaponID : "blackops3.exe", 0x195F80B8;
+}
+
+state("boiii_exotick", "BOIII v.1.0.4 Client")
+{
+    int levelTime : "blackops3.exe", 0xA5502C0;
+    int round_counter : "blackops3.exe", 0xA55BDEC;
+    string13 currentMap : "blackops3.exe", 0x940C5E8;
+    byte is_paused : "blackops3.exe", 0x347EE08;
+    int resetTime : "blackops3.exe", 0x176F9358;
+    byte zombie_killed : "blackops3.exe", 0x4A115A8;
+    int darknessTime : "blackops3.exe", 0x10B315E4;
+        int fixedoffsetDarkness : "blackops3.exe", 0x10;
+    int BoxHitsMoon : "blackops3.exe", 0x47CAB3C;
+    int BoxHitsNacht : "blackops3.exe", 0x47CB2E4;
+    int BoxHitsVerruckt1 : "blackops3.exe", 0x47CBF24;
+    int BoxHitsVerruckt2 : "blackops3.exe", 0x47CD61C;
+    int BoxHitsVerruckt3 : "blackops3.exe", 0x47CC3BC;
+    int BoxHitsVerruckt4 : "blackops3.exe", 0x47CC234;
+    int BoxHitsVerruckt5 : "blackops3.exe", 0x47CC0AC;
+    byte36 trapData : "blackops3.exe", 0xA55BDF1;
+    byte flogger : "blackops3.exe", 0x4713774;
+    int entity : "blackops3.exe", 0x176F9B98;
+    int RagsSlams : "blackops3.exe", 0x36751E0;
+    int NadesCount : "blackops3.exe", 0x36751E0;
+    byte8 childStructPtr : "blackops3.exe", 0x51A3580;
+    int LevelNumEnt : "blackops3.exe", 0xA549DF4;
+    int currentWeaponID : "blackops3.exe", 0xA50D9C0;
+    int BoxWeaponID : "blackops3.exe", 0x195F80B8;
+}
+
+state("boiii_dirty", "BOIII-Dirty v0.0.1")
+{
+    int levelTime : "blackops3.exe", 0xA5502C0;
+    int round_counter : "blackops3.exe", 0xA55BDEC;
+    string13 currentMap : "blackops3.exe", 0x940C5E8;
+    byte is_paused : "blackops3.exe", 0x347EE08;
+    int resetTime : "blackops3.exe", 0x176F9358;
+    byte zombie_killed : "blackops3.exe", 0x4A115A8;
+    int darknessTime : "blackops3.exe", 0x10B315E4;
+        int fixedoffsetDarkness : "blackops3.exe", 0x10;
+    int BoxHitsMoon : "blackops3.exe", 0x47CAB3C;
+    int BoxHitsNacht : "blackops3.exe", 0x47CB2E4;
+    int BoxHitsVerruckt1 : "blackops3.exe", 0x47CBF24;
+    int BoxHitsVerruckt2 : "blackops3.exe", 0x47CD61C;
+    int BoxHitsVerruckt3 : "blackops3.exe", 0x47CC3BC;
+    int BoxHitsVerruckt4 : "blackops3.exe", 0x47CC234;
+    int BoxHitsVerruckt5 : "blackops3.exe", 0x47CC0AC;
+    byte36 trapData : "blackops3.exe", 0xA55BDF1;
+    byte flogger : "blackops3.exe", 0x4713774;
+    int entity : "blackops3.exe", 0x176F9B98;
+    int RagsSlams : "blackops3.exe", 0x36751E0;
+    int NadesCount : "blackops3.exe", 0x36751E0;
+    byte8 childStructPtr : "blackops3.exe", 0x51A3580;
+    int LevelNumEnt : "blackops3.exe", 0xA549DF4;
+    int currentWeaponID : "blackops3.exe", 0xA50D9C0;
+    int BoxWeaponID : "blackops3.exe", 0x195F80B8;
 }
 
 startup
@@ -39,25 +117,43 @@ startup
     settings.Add("Coop Timer", false);
     settings.SetToolTip("Coop Timer", "Use for Coop, so you can pause the timer");
 
-    //Reset Timer Option (Parent Setting)
-    settings.Add("Reset Timer Option", true);
+    settings.Add("Enable Splits", true);
 
-        //Subcategories for Reset Timer Option
-        settings.Add("Reset Timer Text", false, "Reset Timer Text", "Reset Timer Option");
-        settings.SetToolTip("Reset Timer Text", "Show Raw Reset Values");
+    //Reset Options (Parent Setting)
+    settings.Add("Reset Options", true);
 
-        settings.Add("Reset Timer", false, "Reset Timer", "Reset Timer Option");
+        //Subcategories for Reset Options
+        settings.Add("Reset Value", false, "Reset Value", "Reset Options");
+        settings.SetToolTip("Reset Value", "Show Raw Reset Values");
+
+        settings.Add("Reset Timer", false, "Reset Timer", "Reset Options");
+        settings.Add("Entities", false, "Entities", "Reset Options");
+
+    //Error Tracker
+    settings.Add("Errors Trackers", true);
+
+        //Subcategories for Reset Options
+        settings.Add("Child Variable", false, "Child Variable", "Errors Trackers");
+        settings.Add("G-Spawn", false, "G-Spawn", "Errors Trackers");
+
 
     //Darkness Timer
     settings.Add("Darkness", false);
     settings.SetToolTip("Darkness", "Show Darkness values");
 
+    settings.Add("Counters", false);
+    settings.Add("Nade Counter", false, "Nade Counter", "Counters");
+        settings.Add("Rags Slams Counter", false, "Rags Slams Counter", "Counters");
+
     //Box Hits
     settings.Add("Box Hits", false);
         settings.Add("Box Hits Nacht", false, "Box Hits Nacht", "Box Hits");
+        settings.Add("Box Hits Verruckt", false, "Box Hits Verruckt", "Box Hits");
         settings.Add("Box Hits Moon", false, "Box Hits Moon", "Box Hits");
+
+    //settings.Add("Wonder Weapon Average", false); -- Currently not avaiable :/
     
-    settings.Add("Reset Box Hits", false);
+    settings.Add("Clear Counters", false);
 
     // Trap Timers (Parent Setting)
     settings.Add("Trap Timers", true);
@@ -162,10 +258,30 @@ startup
     if (File.Exists(vars.boxHitsFilePath))
     {
         string[] lines = File.ReadAllLines(vars.boxHitsFilePath);
-        if (lines.Length >= 2)
+
+        // Parse each line to extract the values
+        foreach (string line in lines)
         {
-            vars.boxHitsMoonCount = int.Parse(lines[0]);
-            vars.boxHitsNachtCount = int.Parse(lines[1]);
+            if (line.StartsWith("Moon Hits:"))
+            {
+                vars.boxHitsMoonCount = int.Parse(line.Split(':')[1].Trim());
+            }
+            else if (line.StartsWith("Nacht Hits:"))
+            {
+                vars.boxHitsNachtCount = int.Parse(line.Split(':')[1].Trim());
+            }
+            else if (line.StartsWith("Verruckt Hits:"))
+            {
+                vars.boxHitsVerrucktCount = int.Parse(line.Split(':')[1].Trim());
+            }
+            else if (line.StartsWith("Rags Slams:"))
+            {
+                vars.ragsSlamsCounter = int.Parse(line.Split(':')[1].Trim());
+            }
+            else if (line.StartsWith("Nade Count:"))
+            {
+                vars.nadeCounter = int.Parse(line.Split(':')[1].Trim());
+            }
         }
     }
     else
@@ -173,11 +289,50 @@ startup
         // Initialize to 0 if the file doesn't exist
         vars.boxHitsMoonCount = 0;
         vars.boxHitsNachtCount = 0;
+        vars.boxHitsVerrucktCount = 0;
+        vars.ragsSlamsCounter = 0;
+        vars.nadeCounter = 0;
     }
 
     // Existing box hits initialization...
     vars.oldBoxHitsMoon = 0;
     vars.oldBoxHitsNacht = 0;
+    vars.oldBoxHitsVerruckt1 = 0;
+    vars.oldBoxHitsVerruckt2 = 0;
+    vars.oldBoxHitsVerruckt3 = 0;
+    vars.oldBoxHitsVerruckt4 = 0;
+    vars.oldBoxHitsVerruckt5 = 0;
+    //vars.nadeCounter = 0;
+    //vars.ragsSlamsCounter = 0;
+
+    //Average stuff -- Currently not working -- no good addresses
+    vars.wwBoxHitsTotal = 0;      // Total box hits while searching for WW
+    vars.wwObtainedCount = 0;     // Number of times WW was obtained
+    vars.wwAverageHits = 0;       // Current average
+    vars.lastWeaponID = 0;        // Track weapon changes
+    vars.searchingForWW = false;  // Are we currently searching?
+    vars.justGotWW = false;       // Did we just get the WW? (NEW)
+    vars.wwCooldown = 0;          // Cooldown counter
+    vars.wwCurrentHits = 0;       // Current box hits in this search
+    vars.flashFrames = 0;         // Flash effect counter
+
+    vars.lastBoxWeaponID = 0;        // Track previous box weapon ID
+    vars.boxJustGaveWW = false;      // Did the box just give us a WW?
+    vars.boxHitDetected = false;     // Was there a box hit this frame?
+    
+    // Load saved values if they exist
+    if (File.Exists(vars.boxHitsFilePath))
+    {
+        string[] lines = File.ReadAllLines(vars.boxHitsFilePath);
+        foreach (string line in lines)
+        {
+            if (line.StartsWith("WW Total Hits:")) vars.wwBoxHitsTotal = int.Parse(line.Split(':')[1].Trim());
+            if (line.StartsWith("WW Obtained:")) vars.wwObtainedCount = int.Parse(line.Split(':')[1].Trim());
+            if (line.StartsWith("WW Average:")) vars.wwAverageHits = float.Parse(line.Split(':')[1].Trim());
+        }
+    }
+
+    vars.maxChildValue = 0;
 }
 
 init
@@ -201,6 +356,15 @@ init
                 version = "BOIII Client";
                 break;
 
+            case "F735CF4A04B61B019912737343068087":
+                version = "BOIII v.1.0.4 Client";
+                break;
+
+            case "E3F00CA4CC1E835466E655BB4129B7E5":
+                version = "BOIII-Dirty v0.0.1";
+                break;
+
+                
             default:
                 version = "Unknown";
                 break;
@@ -232,7 +396,7 @@ init
         vars.split_index = 1;
     }
 
-    if (settings["Reset Timer Option"])
+    if (settings["Reset Options"])
     {
         vars.startTime = current.levelTime;
         vars.startReset = current.resetTime;
@@ -253,9 +417,11 @@ update
         vars.trueTime = current.levelTime - vars.fixedOffsetGameTime;
     }
 
-    if (settings["Reset Timer Option"])
+    if (settings["Reset Options"])
     {
-        if (old.zombie_killed == 0 && current.zombie_killed == 1)
+        int entityChangeThreshold = 3;
+    
+        if (Math.Abs(old.entity - current.entity) >= entityChangeThreshold)
         {
             vars.elapsedTime = vars.startTime - current.levelTime;
             vars.elapsedReset = vars.startReset - current.resetTime;
@@ -263,45 +429,176 @@ update
             vars.startTime = current.levelTime;
             vars.startReset = current.resetTime;
         }
-    
-        //Update Reset Timer Text Component (only if setting is enabled)
-        if (settings["Reset Timer Text"])
+
+    //Update Reset Value Component (only if setting is enabled)
+    if (settings["Reset Value"])
+    {
+        vars.resetPerTick = vars.elapsedReset / vars.elapsedTime;
+        vars.ticksLeft = (2147483647.0 - current.resetTime) / vars.resetPerTick;
+        string resetText = current.resetTime.ToString() + " / 2147483647"; //Raw reset time
+        vars.SetText("Reset:", resetText);
+    }
+    else
+    {
+        vars.RemoveText("Reset:");
+    }
+
+    if (settings["Entities"])
+    {
+        string resetText = current.entity.ToString(); //Raw reset time
+        vars.SetText("Entities:", resetText);
+    }
+    else
+    {
+        vars.RemoveText("Entities:");
+    }
+
+    if (settings["Child Variable"])
+    {
+        try 
         {
-            vars.resetPerTick = vars.elapsedReset / vars.elapsedTime;
-            vars.ticksLeft = (2147483647.0 - current.resetTime) / vars.resetPerTick;
-            string resetText = current.resetTime.ToString() + " / 2147483647"; //Raw reset time
-            vars.SetText("Reset:", resetText);
+            // 1. Read the 8-byte pointer value
+            byte[] pointerBytes = current.childStructPtr;
+            if (pointerBytes == null || pointerBytes.Length != 8)
+            {
+                vars.SetText("Child:", "PTR READ FAIL");
+                return;
+            }
+            
+            // 2. Convert to 64-bit address
+            ulong childBase = BitConverter.ToUInt64(pointerBytes, 0);
+            //print("Base Pointer: 0x" + childBase.ToString("X"));
+            
+            // 3. Validate pointer
+            if (childBase < 0x10000 || childBase > 0x7FFFFFFFFFFF)
+            {
+                vars.SetText("Child:", "EXECUTING");
+                return;
+            }
+            
+            // 4. Calculate final address (base + 0x18)
+            ulong finalAddress = childBase + 0x18;
+            
+            // 5. Read the 4-byte integer value
+            byte[] valueBytes = game.ReadBytes((IntPtr)finalAddress, 4);
+            if (valueBytes == null || valueBytes.Length != 4)
+            {
+                vars.SetText("Child:", "VAL READ FAIL");
+                return;
+            }
+            
+            int childValue = BitConverter.ToInt32(valueBytes, 0);
+            
+            // Update max value if current is higher
+            if (childValue > vars.maxChildValue)
+            {
+                vars.maxChildValue = childValue;
+            }
+            
+            // Display current and max without string interpolation
+            vars.SetText("Child:", childValue.ToString() + " Max: " + vars.maxChildValue.ToString() + " / 130000");
         }
-        else
+        catch (Exception ex)
         {
-            vars.RemoveText("Reset:");
+            vars.SetText("Child:", "EXCEPTION");
         }
-    
-        //Update Formatted Reset Timer (only if setting is enabled)
-        if (settings["Reset Timer"])
+    }
+    else
+    {
+        vars.RemoveText("Child:");
+    }
+
+    if (settings["G-Spawn"])
+    {
+        string resetText = current.LevelNumEnt.ToString() + " / 1022"; //Raw reset time
+        vars.SetText("G-Spawn:", resetText);
+    }
+    else
+    {
+        vars.RemoveText("G-Spawn:");
+    }
+
+    // Update Rags Slams counter
+    if (settings["Rags Slams Counter"])
+    {
+        if (old.RagsSlams == 0 && current.RagsSlams == 45)
         {
-            vars.resetPerTick = vars.elapsedReset / vars.elapsedTime;
-            vars.ticksLeft = (2147483647.0 - current.resetTime) / vars.resetPerTick;
-    
+            vars.ragsSlamsCounter++; // Increment the counter
+        }
+
+        // Display the counter value
+        vars.SetText("Rags Slams Counter:", vars.ragsSlamsCounter);
+    }
+    else
+    {
+        vars.RemoveText("Rags Slams Counter:");
+    }
+
+    if (settings["Nade Counter"])
+    {
+        // More robust check that catches the transition to 38 regardless of previous value
+        if (current.RagsSlams == 38 && old.RagsSlams != 38)
+        {
+            vars.nadeCounter++; // Increment the counter
+            //print("Nade counter incremented! New count: " + vars.nadeCounter); // Debug output
+        }
+
+        // Display the counter value
+        vars.SetText("Nade Counter:", vars.nadeCounter);
+    }
+    else
+    {
+        vars.RemoveText("Nade Counter:");
+    }
+
+    //Update Formatted Reset Timer (only if setting is enabled)
+    if (settings["Reset Timer"])
+    {
+        vars.resetPerTick = vars.elapsedReset / vars.elapsedTime;
+        vars.ticksLeft = (2147483647.0 - current.resetTime) / vars.resetPerTick;
+
+        //Validate ticksLeft to prevent extreme values
+        if (vars.ticksLeft > 0 && vars.ticksLeft < 1e9) // Adjust bounds as needed
+        {
             //Calculate the time from ticksLeft
             double totalMilliseconds = vars.ticksLeft * 50;
-    
-            //Calculate hours, minutes, seconds, and milliseconds manually
+
+            //Calculate hours, minutes, seconds, and hundredths manually
             int hours = (int)(totalMilliseconds / (1000 * 60 * 60));
             int minutes = (int)((totalMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
             int seconds = (int)((totalMilliseconds % (1000 * 60)) / 1000);
-            int milliseconds = (int)(totalMilliseconds % 1000);
-    
-            //Format the time as hhh:mm:ss.fff using string.Format
-            string formattedResetText = string.Format("{0:D3}:{1:D2}:{2:D2}.{3:D3}", hours, minutes, seconds, milliseconds);
-    
+            int hundredths = (int)(totalMilliseconds % 1000) / 10; // Convert to 2 digits
+
+            string formattedResetText;
+            if (hours > 0)
+            {
+                //Format as h:mm:ss.ff
+                formattedResetText = string.Format("{0}:{1:D2}:{2:D2}.{3:D2}", hours, minutes, seconds, hundredths);
+            }
+            else if (minutes > 0)
+            {
+                //Format as m:ss.ff
+                formattedResetText = string.Format("{0}:{1:D2}.{2:D2}", minutes, seconds, hundredths);
+            }
+            else
+            {
+                //Format as s.ff
+                formattedResetText = string.Format("{0}.{1:D2}", seconds, hundredths);
+            }
+
             vars.SetText("Reset Timer:", formattedResetText);
         }
         else
         {
+            //If ticksLeft is invalid, don't update the timer
             vars.RemoveText("Reset Timer:");
         }
     }
+    else
+    {
+        vars.RemoveText("Reset Timer:");
+    }
+}
 
     //Darkness
     if (settings["Darkness"])
@@ -353,14 +650,140 @@ update
         vars.RemoveText("Box hits Nacht:");
     }
 
-    if (settings["Reset Box Hits"])
+    // Update Box Hits Verruckt counter
+    if (settings["Box Hits Verruckt"])
     {
+        // Check each Verruckt box location
+        if ((old.BoxHitsVerruckt1 != current.BoxHitsVerruckt1 && current.BoxHitsVerruckt1 == 1) ||
+            (old.BoxHitsVerruckt2 != current.BoxHitsVerruckt2 && current.BoxHitsVerruckt2 == 1) ||
+            (old.BoxHitsVerruckt3 != current.BoxHitsVerruckt3 && current.BoxHitsVerruckt3 == 1) ||
+            (old.BoxHitsVerruckt4 != current.BoxHitsVerruckt4 && current.BoxHitsVerruckt4 == 1) ||
+            (old.BoxHitsVerruckt5 != current.BoxHitsVerruckt5 && current.BoxHitsVerruckt5 == 1))
+        {
+            vars.boxHitsVerrucktCount++; // Increment the counter
+        }
+
+        // Update all old value trackers
+        vars.oldBoxHitsVerruckt1 = current.BoxHitsVerruckt1;
+        vars.oldBoxHitsVerruckt2 = current.BoxHitsVerruckt2;
+        vars.oldBoxHitsVerruckt3 = current.BoxHitsVerruckt3;
+        vars.oldBoxHitsVerruckt4 = current.BoxHitsVerruckt4;
+        vars.oldBoxHitsVerruckt5 = current.BoxHitsVerruckt5;
+
+        // Display the box hit count
+        vars.SetText("Box hits Verruckt:", vars.boxHitsVerrucktCount);
+    }
+    else
+    {
+        vars.RemoveText("Box hits Verruckt:");
+    }
+
+    if (vars.justGotWW) 
+    {
+    vars.wwCooldown = 10; // 10 frames cooldown
+    } else if (vars.wwCooldown > 0) {
+        vars.wwCooldown--;
+    }
+
+    /*if (settings["Wonder Weapon Average"] && current.currentMap == "zm_asylum")
+    {
+        // Handle cooldown
+        if (vars.justGotWW) 
+        {
+            vars.wwCooldown = 10; // 10 frames cooldown
+            vars.justGotWW = false;
+        } 
+        else if (vars.wwCooldown > 0) 
+        {
+            vars.wwCooldown--;
+        }
+
+        // Check if we got WW from box (BoxWeaponID changed to 107)
+        bool gotWWFromBox = (old.BoxWeaponID != current.BoxWeaponID && current.BoxWeaponID == 107 && vars.wwCooldown == 0);
+
+        // Check if we're holding WW (currentWeaponID = 107)
+        bool holdingWW = (current.currentWeaponID == 107);
+
+        // Check for box hits (any Verruckt box location)
+        bool boxWasHit = (old.BoxHitsVerruckt1 != current.BoxHitsVerruckt1 && current.BoxHitsVerruckt1 == 1) ||
+                        (old.BoxHitsVerruckt2 != current.BoxHitsVerruckt2 && current.BoxHitsVerruckt2 == 1) ||
+                        (old.BoxHitsVerruckt3 != current.BoxHitsVerruckt3 && current.BoxHitsVerruckt3 == 1) ||
+                        (old.BoxHitsVerruckt4 != current.BoxHitsVerruckt4 && current.BoxHitsVerruckt4 == 1) ||
+                        (old.BoxHitsVerruckt5 != current.BoxHitsVerruckt5 && current.BoxHitsVerruckt5 == 1);
+
+        // Count box hits while searching for WW
+        if (vars.searchingForWW && boxWasHit)
+        {
+            vars.wwCurrentHits++;
+        }
+
+        // When we get WW from box
+        if (gotWWFromBox && vars.searchingForWW)
+        {
+            vars.wwObtainedCount++;
+            vars.wwBoxHitsTotal += vars.wwCurrentHits;
+            vars.wwAverageHits = (float)vars.wwBoxHitsTotal / vars.wwObtainedCount;
+            vars.justGotWW = true;
+            vars.flashFrames = 30;
+            vars.searchingForWW = false;
+            vars.wwCurrentHits = 0;
+        }
+
+        // Start searching when we lose WW (either by swapping weapons or box hit)
+        if (!holdingWW && old.currentWeaponID == 107)
+        {
+            vars.searchingForWW = true;
+        }
+
+        // Flash effect display
+        string wwText;
+        if (vars.flashFrames > 0)
+        {
+            vars.flashFrames--;
+            bool flashState = (vars.flashFrames / 5) % 2 == 0;
+            wwText = flashState ? ">>> " + vars.wwAverageHits.ToString("F1") + " <<<" 
+                               : "Avg: " + vars.wwAverageHits.ToString("F1");
+        }
+        else
+        {
+            wwText = "Avg: " + vars.wwAverageHits.ToString("F1");
+        }
+
+        wwText += " (Cur: " + vars.wwCurrentHits + ", Got: " + vars.wwObtainedCount + ")";
+        vars.SetText("WW Average:", wwText);
+        print("BoxWeaponID: " + current.BoxWeaponID + ", currentWeaponID: " + current.currentWeaponID + ", searching: " + vars.searchingForWW);
+    }
+    else
+    {
+        vars.RemoveText("WW Average:");
+    }*/
+
+    if (settings["Clear Counters"])
+    {
+        // Clear existing counters
         vars.boxHitsMoonCount = 0;
         vars.boxHitsNachtCount = 0;
-        settings["Reset Box Hits"] = false; // Reset the button state
+        vars.boxHitsVerrucktCount = 0;
+        vars.ragsSlamsCounter = 0;
+        vars.nadeCounter = 0;
+
+        // Clear WW counters
+        vars.wwBoxHitsTotal = 0;
+        vars.wwObtainedCount = 0;
+        vars.wwAverageHits = 0;
+        vars.wwCurrentHits = 0;
 
         // Save the reset values to file
-        string[] lines = { vars.boxHitsMoonCount.ToString(), vars.boxHitsNachtCount.ToString() };
+        string[] lines = {
+            "Moon Hits: 0",
+            "Nacht Hits: 0", 
+            "Verruckt Hits: 0",
+            "Rags Slams: 0",
+            "Nade Count: 0",
+            "WW Total Hits: 0",
+            "WW Obtained: 0",
+            "WW Average: 0"
+        };
         File.WriteAllLines(vars.boxHitsFilePath, lines);
     }
 
@@ -478,12 +901,15 @@ update
     else
     {
         // Remove the Flogger Trap text component if the setting is disabled
-        vars.RemoveText("Flogger Trap:");
+        vars.RemoveText("Flogger Trap");
     }
 }
 
 split
 {
+    if (!settings["Enable Splits"])
+        return false;
+
     if (settings["Coop Timer"])
     {
         if (current.round_counter == old.round_counter + 1)
@@ -513,8 +939,6 @@ gameTime
         "zm_genesis", "zm_prototype", "zm_asylum", "zm_sumpf", "zm_theater", 
         "zm_cosmodrome", "zm_temple", "zm_moon", "zm_tomb"
     };
-
-    print("Current Map: " + current.currentMap);
 
     if (Array.IndexOf(arrayMaps, current.currentMap) == -1 || current.round_counter == 0)
     {
@@ -571,6 +995,9 @@ isLoading
 
 reset
 {
+    if (!settings["Enable Splits"])
+        return false;
+        
     if (settings["Coop Timer"])
     {
         if (current.round_counter == 0 && old.round_counter != 0)
@@ -593,30 +1020,36 @@ reset
 
 exit
 {
-    if (settings["Reset Timer Text"])
+    // Reuse the same dictionary mapping for text removals
+    var textRemovals = new Dictionary<string, string>
     {
-        vars.RemoveText("Reset:");
-    }
-    if (settings["Reset Timer"])
+        {"Reset Value", "Reset:"},
+        {"Entities", "Entities:"},
+        {"Child Variable", "Child:"},
+        {"G-Spawn", "G-Spawn:"},
+        {"Reset Timer", "Reset Timer:"},
+        {"Rags Slams Counter", "Rags Slams Counter:"},
+        {"Nade Counter", "Nade Counter:"},
+        {"Darkness", "Darkness:"},
+        {"Box Hits Nacht", "Box hits Nacht:"},
+        {"Box Hits Verruckt", "Box hits Verruckt:"},
+        {"Box Hits Moon", "Box hits Moon:"}
+        //{"Wonder Weapon Average", "WW Average:"}
+    };
+
+    // Process all text removals
+    foreach (var item in textRemovals)
     {
-        vars.RemoveText("Reset Timer:");
-    }
-    if (settings["Darkness"])
-    {
-        vars.RemoveText("Darkness:");
-    }
-    if (settings["Box Hits Nacht"])
-    {
-        vars.RemoveText("Box hits Nacht:");
-    }
-    if (settings["Box Hits Moon"])
-    {
-        vars.RemoveText("Box hits Moon:");
+        if (settings[item.Key])
+        {
+            vars.RemoveText(item.Value);
+        }
     }
 
+    // Handle trap timers if enabled
     if (settings["Trap Timers"])
     {
-        var data = new Dictionary<string, string>
+        var trapData = new Dictionary<string, string>
         {
             {"bunker",     "Bunker Trap"},
             {"kinoft",     "Fire Trap"},
@@ -637,39 +1070,46 @@ exit
             {"courtyard",  "Courtyard Trap"}
         };
 
-        foreach (string trapID in data.Keys)
+        foreach (string trapText in trapData.Values)
         {
-            vars.RemoveText(data[trapID]);
+            vars.RemoveText(trapText);
         }
     }
 }
 
 shutdown
 {
-    if (settings["Reset Timer Text"])
+    // Create a dictionary mapping setting names to their corresponding text labels
+    var textRemovals = new Dictionary<string, string>
     {
-        vars.RemoveText("Reset:");
-    }
-    if (settings["Reset Timer"])
+        {"Reset Value", "Reset:"},
+        {"Entities", "Entities:"},
+        {"Child Variable", "Child:"},
+        {"G-Spawn", "G-Spawn:"},
+        {"Reset Timer", "Reset Timer:"},
+        {"Rags Slams Counter", "Rags Slams Counter:"},
+        {"Nade Counter", "Nade Counter:"},
+        {"Darkness", "Darkness:"},
+        {"Box Hits Nacht", "Box hits Nacht:"},
+        {"Box Hits Verruckt", "Box hits Verruckt:"},
+        {"Box Hits Moon", "Box hits Moon:"}
+        //{"Wonder Weapon Average", "WW Average:"}
+        
+    };
+
+    // Process all text removals
+    foreach (var item in textRemovals)
     {
-        vars.RemoveText("Reset Timer:");
-    }
-    if (settings["Darkness"])
-    {
-        vars.RemoveText("Darkness:");
-    }
-    if (settings["Box Hits Nacht"])
-    {
-        vars.RemoveText("Box hits Nacht:");
-    }
-    if (settings["Box Hits Moon"])
-    {
-        vars.RemoveText("Box hits Moon:");
+        if (settings[item.Key])
+        {
+            vars.RemoveText(item.Value);
+        }
     }
 
+    // Handle trap timers if enabled
     if (settings["Trap Timers"])
     {
-        var data = new Dictionary<string, string>
+        var trapData = new Dictionary<string, string>
         {
             {"bunker",     "Bunker Trap"},
             {"kinoft",     "Fire Trap"},
@@ -690,12 +1130,26 @@ shutdown
             {"courtyard",  "Courtyard Trap"}
         };
 
-        foreach (string trapID in data.Keys)
+        foreach (string trapText in trapData.Values)
         {
-            vars.RemoveText(data[trapID]);
+            vars.RemoveText(trapText);
         }
     }
 
-    string[] lines = { vars.boxHitsMoonCount.ToString(), vars.boxHitsNachtCount.ToString() };
+    // Save the values with labels to the file
+    string[] lines = {
+        "Moon Hits: " + vars.boxHitsMoonCount.ToString(),
+        "Nacht Hits: " + vars.boxHitsNachtCount.ToString(),
+        "Verruckt Hits: " + vars.boxHitsVerrucktCount.ToString(),
+        "Rags Slams: " + vars.ragsSlamsCounter.ToString(),
+        "Nade Count: " + vars.nadeCounter.ToString()
+    };
     File.WriteAllLines(vars.boxHitsFilePath, lines);
+
+    string[] wwLines = {
+        string.Format("WW Total Hits: {0}", vars.wwBoxHitsTotal),
+        string.Format("WW Obtained: {0}", vars.wwObtainedCount),
+        string.Format("WW Average: {0}", vars.wwAverageHits)
+    };
+    File.AppendAllLines(vars.boxHitsFilePath, wwLines);
 }
