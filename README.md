@@ -38,12 +38,12 @@ For `Timing Method`, I recommend using `Current Timing Method`.
 ## Known Issues
 > [!CAUTION]
 > These are some known issues with the timer, and will be fixed in the future.
+> ### Saving layouts
+> If you save your layout, with some settings enable you will encounter unexpected behavior. Example:
+> - Duplicates Reset options and or other settings if enabled.
+> - Timer size will get smaller
+> ### Solution
+> Save your layout only when you first loaded the script or click on `Reset to default` in the bottom right in `Scriptable Auto Splitter`, then save.
+> I recommend to never save your layout whenever you enable additional settings.
 
-### Saving layouts
-If you save your layout, with some settings enable you will encounter unexpected behavior. Example:
-- Duplicates Reset options and or other settings if enabled.
-- Timer size will get smaller
-### Solution
-Save your layout only when you first loaded the script or click on `Reset to default` in the bottom right in `Scriptable Auto Splitter`, then save.
-I recommend to never save your layout whenever you enable additional settings.
 
