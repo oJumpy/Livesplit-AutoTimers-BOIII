@@ -1,6 +1,7 @@
 state("blackops3", "BO3 Steam")
 {
     int levelTime : 0xA5502C0;
+    //int levelcoopTime : 0x353E588;
     int round_counter : 0xA55BDEC;
     string13 currentMap : 0x940C5E8;
     byte is_paused : 0x347EE08;
@@ -19,10 +20,13 @@ state("blackops3", "BO3 Steam")
     byte flogger : 0x4713774;
     int entity : 0x176F9B98;
     int RagsSlams : 0x36751E0;
+    int ValksKill : 0x51A3B38;
     byte8 childStructPtr : 0x51A3580;
+    byte8 childCSCStructPtr : 0x51A3680;
     int LevelNumEnt : 0xA549DF4;
     int currentWeaponID : 0xA50D9C0;
     int BoxWeaponID : 0x195F80B8;
+    int animError : 0x51A3814;
 }
 
 state("boiii", "BOIII Client")
@@ -46,7 +50,9 @@ state("boiii", "BOIII Client")
     byte flogger : "blackops3.exe", 0x4713774;
     int entity : "blackops3.exe", 0x176F9B98;
     int RagsSlams : "blackops3.exe", 0x36751E0;
+    int ValksKill : "blackops3.exe", 0x51A3B38;
     byte8 childStructPtr : "blackops3.exe", 0x51A3580;
+    byte8 childCSCStructPtr : "blackops3.exe", 0x51A3680;
     int LevelNumEnt : "blackops3.exe", 0xA549DF4;
     int currentWeaponID : "blackops3.exe", 0xA50D9C0;
     int BoxWeaponID : "blackops3.exe", 0x195F80B8;
@@ -74,7 +80,9 @@ state("boiii_exotick", "BOIII v.1.0.4 Client")
     int entity : "blackops3.exe", 0x176F9B98;
     int RagsSlams : "blackops3.exe", 0x36751E0;
     int NadesCount : "blackops3.exe", 0x36751E0;
+    int ValksKill : "blackops3.exe", 0x51A3B38;
     byte8 childStructPtr : "blackops3.exe", 0x51A3580;
+    byte8 childCSCStructPtr : "blackops3.exe", 0x51A3680;
     int LevelNumEnt : "blackops3.exe", 0xA549DF4;
     int currentWeaponID : "blackops3.exe", 0xA50D9C0;
     int BoxWeaponID : "blackops3.exe", 0x195F80B8;
@@ -102,7 +110,9 @@ state("boiii_dirty", "BOIII-Dirty v0.0.1")
     int entity : "blackops3.exe", 0x176F9B98;
     int RagsSlams : "blackops3.exe", 0x36751E0;
     int NadesCount : "blackops3.exe", 0x36751E0;
+    int ValksKill : "blackops3.exe", 0x51A3B38;
     byte8 childStructPtr : "blackops3.exe", 0x51A3580;
+    byte8 childCSCStructPtr : "blackops3.exe", 0x51A3680;
     int LevelNumEnt : "blackops3.exe", 0xA549DF4;
     int currentWeaponID : "blackops3.exe", 0xA50D9C0;
     int BoxWeaponID : "blackops3.exe", 0x195F80B8;
@@ -133,7 +143,8 @@ startup
     settings.Add("Errors Trackers", true);
 
         //Subcategories for Reset Options
-        settings.Add("Child Variable", false, "Child Variable", "Errors Trackers");
+        settings.Add("Child Server Variable", false, "Child Server Variable", "Errors Trackers");
+        settings.Add("Child Client Variable", false, "Child Client Variable", "Errors Trackers");
         settings.Add("G-Spawn", false, "G-Spawn", "Errors Trackers");
 
 
@@ -142,8 +153,9 @@ startup
     settings.SetToolTip("Darkness", "Show Darkness values");
 
     settings.Add("Counters", false);
-    settings.Add("Nade Counter", false, "Nade Counter", "Counters");
+        settings.Add("Nade Counter", false, "Nade Counter", "Counters");
         settings.Add("Rags Slams Counter", false, "Rags Slams Counter", "Counters");
+        settings.Add("Valk Counter", false, "Valk Counter", "Counters");
 
     //Box Hits
     settings.Add("Box Hits", false);
@@ -167,6 +179,10 @@ startup
         // Der Eisendrache
         settings.Add("de", false, "Der Eisendrache", "Trap Timers");
             settings.Add("courtyard", true, "Courtyard", "de");
+        
+        settings.Add("zns", false, "Zetsubou no Shima", "Trap Timers");
+            settings.Add("planetrap", true, "Propeller Trap", "zns");
+            settings.Add("fantrap", true, "Fan Trap", "zns");
 
         // Gorod Krovi
         settings.Add("gk", false, "Gorod Krovi", "Trap Timers");
@@ -282,6 +298,10 @@ startup
             {
                 vars.nadeCounter = int.Parse(line.Split(':')[1].Trim());
             }
+            else if (line.StartsWith("Valk Count:"))
+            {
+                vars.valksCounter = int.Parse(line.Split(':')[1].Trim());
+            }
         }
     }
     else
@@ -292,6 +312,7 @@ startup
         vars.boxHitsVerrucktCount = 0;
         vars.ragsSlamsCounter = 0;
         vars.nadeCounter = 0;
+        vars.valksCounter = 0;
     }
 
     // Existing box hits initialization...
@@ -333,6 +354,7 @@ startup
     }
 
     vars.maxChildValue = 0;
+    vars.CSCmaxChildValue = 0;
 }
 
 init
@@ -372,16 +394,15 @@ init
     
     refreshRate = 100;
     
-    if (settings["Trap Timers"])
+    if (settings["Trap Timers"] && settings["flogger"])
     {
         vars.trapStarts = new Dictionary<string, int>();
-        foreach (string trapID in new string[] { "bunker", "kinoft", "m8room", "camptrap", "comm", "doc", "fishing", "storage", "flogger", "bridge", "jugtrap", "mkder", "doubletap", "speedcola", "vesper", "kn", "courtyard" })
+        foreach (string trapID in new string[] { "bunker", "kinoft", "m8room", "camptrap", "comm", "doc", "fishing", "storage", "flogger", "bridge", "jugtrap", "mkder", "doubletap", "speedcola", "vesper", "kn", "courtyard", "planetrap", "fantrap" })
         {
             vars.trapStarts[trapID] = -2020;
+            vars.FloggertrapStart = -1540;
         }
     }
-
-    vars.FloggertrapStart = -1540;
 
     if (settings["Solo Timer"])
     {
@@ -453,15 +474,20 @@ update
         vars.RemoveText("Entities:");
     }
 
-    if (settings["Child Variable"])
+    if (settings["Child Server Variable"])
     {
+        if (current.levelTime == 0)
+        {
+            vars.maxChildValue = 0;
+        }
+
         try 
         {
             // 1. Read the 8-byte pointer value
             byte[] pointerBytes = current.childStructPtr;
             if (pointerBytes == null || pointerBytes.Length != 8)
             {
-                vars.SetText("Child:", "PTR READ FAIL");
+                vars.SetText("Child GSC:", "PTR READ FAIL");
                 return;
             }
             
@@ -472,7 +498,7 @@ update
             // 3. Validate pointer
             if (childBase < 0x10000 || childBase > 0x7FFFFFFFFFFF)
             {
-                vars.SetText("Child:", "EXECUTING");
+                vars.SetText("Child GSC:", "EXECUTING");
                 return;
             }
             
@@ -483,7 +509,7 @@ update
             byte[] valueBytes = game.ReadBytes((IntPtr)finalAddress, 4);
             if (valueBytes == null || valueBytes.Length != 4)
             {
-                vars.SetText("Child:", "VAL READ FAIL");
+                vars.SetText("Child GSC:", "VAL READ FAIL");
                 return;
             }
             
@@ -496,16 +522,76 @@ update
             }
             
             // Display current and max without string interpolation
-            vars.SetText("Child:", childValue.ToString() + " Max: " + vars.maxChildValue.ToString() + " / 130000");
+            vars.SetText("Child GSC:", childValue.ToString() + " Max: " + vars.maxChildValue.ToString() + " / 130000");
         }
         catch (Exception ex)
         {
-            vars.SetText("Child:", "EXCEPTION");
+            vars.SetText("Child GSC:", "EXCEPTION");
         }
     }
     else
     {
-        vars.RemoveText("Child:");
+        vars.RemoveText("Child GSC:");
+    }
+
+    if (settings["Child Client Variable"])
+    {
+        if (current.levelTime == 0)
+        {
+            vars.CSCmaxChildValue = 0;
+        }
+
+        try 
+        {
+            // 1. Read the 8-byte pointer value
+            byte[] pointerBytes = current.childCSCStructPtr;
+            if (pointerBytes == null || pointerBytes.Length != 8)
+            {
+                vars.SetText("Child CSC:", "PTR READ FAIL");
+                return;
+            }
+            
+            // 2. Convert to 64-bit address
+            ulong childBase = BitConverter.ToUInt64(pointerBytes, 0);
+            //print("Base Pointer: 0x" + childBase.ToString("X"));
+            
+            // 3. Validate pointer
+            if (childBase < 0x10000 || childBase > 0x7FFFFFFFFFFF)
+            {
+                vars.SetText("Child CSC:", "EXECUTING");
+                return;
+            }
+            
+            // 4. Calculate final address (base + 0x18) + 0x100 for Client
+            ulong finalAddress = childBase + 0x18;
+
+            // 5. Read the 4-byte integer value
+            byte[] valueBytes = game.ReadBytes((IntPtr)finalAddress, 4);
+            if (valueBytes == null || valueBytes.Length != 4)
+            {
+                vars.SetText("Child CSC:", "VAL READ FAIL");
+                return;
+            }
+            
+            int childValue = BitConverter.ToInt32(valueBytes, 0);
+            
+            // Update max value if current is higher
+            if (childValue > vars.CSCmaxChildValue)
+            {
+                vars.CSCmaxChildValue = childValue;
+            }
+            
+            // Display current and max without string interpolation
+            vars.SetText("Child CSC:", childValue.ToString() + " Max: " + vars.CSCmaxChildValue.ToString() + " / 65000");
+        }
+        catch (Exception ex)
+        {
+            vars.SetText("Child CSC:", "EXCEPTION");
+        }
+    }
+    else
+    {
+        vars.RemoveText("Child CSC:");
     }
 
     if (settings["G-Spawn"])
@@ -551,6 +637,20 @@ update
         vars.RemoveText("Nade Counter:");
     }
 
+    if (settings["Valk Counter"])
+    {
+        if (current.ValksKill != old.ValksKill)
+        {
+            vars.valksCounter++; // Increment the counter
+        }
+
+        vars.SetText("Valk Kill Counter:", vars.valksCounter);
+    }
+    else
+    {
+        vars.RemoveText("Valk Kill Counter:");
+    }
+
     //Update Formatted Reset Timer (only if setting is enabled)
     if (settings["Reset Timer"])
     {
@@ -591,7 +691,7 @@ update
         else
         {
             //If ticksLeft is invalid, don't update the timer
-            vars.RemoveText("Reset Timer:");
+            //vars.RemoveText("Reset Timer:");
         }
     }
     else
@@ -766,6 +866,7 @@ update
         vars.boxHitsVerrucktCount = 0;
         vars.ragsSlamsCounter = 0;
         vars.nadeCounter = 0;
+        vars.valksCounter = 0;
 
         // Clear WW counters
         vars.wwBoxHitsTotal = 0;
@@ -780,6 +881,7 @@ update
             "Verruckt Hits: 0",
             "Rags Slams: 0",
             "Nade Count: 0",
+            "Valk Count: 0",
             "WW Total Hits: 0",
             "WW Obtained: 0",
             "WW Average: 0"
@@ -808,51 +910,45 @@ update
             {"speedcola",  new Dictionary<string, object> { {"value", 154}, {"displayName", "Speed Cola Trap"} }},
             {"vesper",     new Dictionary<string, object> { {"value", 28},  {"displayName", "Stamin-Up Trap"} }},
             {"kn",         new Dictionary<string, object> { {"value", 27},  {"displayName", "Mule Kick Trap"} }},
-            {"courtyard",  new Dictionary<string, object> { {"value", 224}, {"displayName", "Courtyard Trap"} }}
+            {"courtyard",  new Dictionary<string, object> { {"value", 224}, {"displayName", "Courtyard Trap"} }},
+            {"planetrap",  new Dictionary<string, object> { {"value", 164}, {"displayName", "Plane Trap"},{"duration", 1200},{"byteOffset", 20},{"bitMask", 0x10} }},
+            {"fantrap",    new Dictionary<string, object> { {"value", 258}, {"displayName", "Fan Trap"},{"duration", 1200},{"byteOffset", 32},{"bitMask", 0x04} }}
         };
-
-        int byteOffset = 0;
-        int bitMask = 0;
-
+    
         foreach (string trapID in data.Keys)
         {
             if (settings[trapID])
             {
                 var trapInfo = data[trapID];
-                int trapValue = (int)trapInfo["value"];
                 string trapDisplayName = (string)trapInfo["displayName"];
+                int trapDuration = trapInfo.ContainsKey("duration") ? (int)trapInfo["duration"] : 2020;
 
-                byteOffset = trapValue / 8;
-                bitMask = 0x80 >> trapValue % 8;
+                int currentByteOffset = trapInfo.ContainsKey("byteOffset") ? (int)trapInfo["byteOffset"] : ((int)trapInfo["value"] / 8);
+                int currentBitMask = trapInfo.ContainsKey("bitMask") ? (int)trapInfo["bitMask"] : (0x80 >> ((int)trapInfo["value"] % 8));
 
-                // Check if the trap has been activated
-                if ((old.trapData[byteOffset] & bitMask) < (current.trapData[byteOffset] & bitMask))
+                bool wasActive = (old.trapData[currentByteOffset] & currentBitMask) != 0;
+                bool isActive = (current.trapData[currentByteOffset] & currentBitMask) != 0;
+
+                if (!wasActive && isActive)
                 {
-                    vars.trapStarts[trapID] = current.levelTime; // Update individual trap start time
+                    vars.trapStarts[trapID] = current.levelTime;
                 }
 
-                // Calculate the remaining time for the trap
-                int remainingTime = 2020 - (current.levelTime - vars.trapStarts[trapID]);
-                if (remainingTime < 0)
-                {
-                    remainingTime = 0;
-                }
+                // Calculate remaining time with custom duration
+                int remainingTime = trapDuration - (current.levelTime - vars.trapStarts[trapID]);
+                if (remainingTime < 0) remainingTime = 0;
 
-                // Convert remaining time to m:ss:ff format
+                // Format time display
                 int totalMilliseconds = remainingTime * 50;
                 int minutes = totalMilliseconds / (1000 * 60);
                 int seconds = (totalMilliseconds % (1000 * 60)) / 1000;
                 int hundredths = (totalMilliseconds % 1000) / 10;
 
-                // Format the time as m:ss:ff
                 string formattedTime = string.Format("{0}:{1:D2}:{2:D2}", minutes, seconds, hundredths);
-
-                // Display the trap timer as a text component
                 vars.SetText(trapDisplayName, formattedTime);
             }
             else
             {
-                // Remove the text component if the trap is disabled
                 var trapInfo = data[trapID];
                 string trapDisplayName = (string)trapInfo["displayName"];
                 vars.RemoveText(trapDisplayName);
@@ -961,6 +1057,8 @@ start
         {
             vars.timer_start = 0;
             vars.split_index = 0;
+            vars.maxChildValue = 0;
+            vars.CSCmaxChildValue = 0;
         }
         if (current.round_counter == 1 && vars.timer_start == 0)
         {
@@ -971,6 +1069,8 @@ start
     }
     else if (settings["Solo Timer"])
     {
+        vars.maxChildValue = 0;
+        vars.CSCmaxChildValue = 0;
         return true;
     }
     return false;
@@ -1004,6 +1104,8 @@ reset
         {
             vars.timer_start = 0;
             vars.split_index = 1;
+            vars.maxChildValue = 0;
+            vars.CSCmaxChildValue = 0;
             return true;
         }
     }
@@ -1012,6 +1114,8 @@ reset
         if (current.round_counter == 0 && old.round_counter != 0)
         {
             vars.split_index = 0;
+            vars.maxChildValue = 0;
+            vars.CSCmaxChildValue = 0;
             return true;
         }
     }
@@ -1025,11 +1129,13 @@ exit
     {
         {"Reset Value", "Reset:"},
         {"Entities", "Entities:"},
-        {"Child Variable", "Child:"},
+        {"Child Server Variable", "Child GSC:"},
+        {"Child Client Variable", "Child CSC:"},
         {"G-Spawn", "G-Spawn:"},
         {"Reset Timer", "Reset Timer:"},
         {"Rags Slams Counter", "Rags Slams Counter:"},
         {"Nade Counter", "Nade Counter:"},
+        {"Valk Counter", "Valk Kill Counter::"},
         {"Darkness", "Darkness:"},
         {"Box Hits Nacht", "Box hits Nacht:"},
         {"Box Hits Verruckt", "Box hits Verruckt:"},
@@ -1067,7 +1173,9 @@ exit
             {"speedcola",  "Speed Cola Trap"},
             {"vesper",     "Stamin-Up Trap"},
             {"kn",         "Mule Kick Trap"},
-            {"courtyard",  "Courtyard Trap"}
+            {"courtyard",  "Courtyard Trap"},
+            {"planetrap",  "Plane Trap"},
+            {"fantrap",    "Fan Trap"}
         };
 
         foreach (string trapText in trapData.Values)
@@ -1084,11 +1192,13 @@ shutdown
     {
         {"Reset Value", "Reset:"},
         {"Entities", "Entities:"},
-        {"Child Variable", "Child:"},
+        {"Child Server Variable", "Child GSC:"},
+        {"Child Client Variable", "Child CSC:"},
         {"G-Spawn", "G-Spawn:"},
         {"Reset Timer", "Reset Timer:"},
         {"Rags Slams Counter", "Rags Slams Counter:"},
         {"Nade Counter", "Nade Counter:"},
+        {"Valk Counter", "Valk Kill Counter::"},
         {"Darkness", "Darkness:"},
         {"Box Hits Nacht", "Box hits Nacht:"},
         {"Box Hits Verruckt", "Box hits Verruckt:"},
@@ -1127,7 +1237,9 @@ shutdown
             {"speedcola",  "Speed Cola Trap"},
             {"vesper",     "Stamin-Up Trap"},
             {"kn",         "Mule Kick Trap"},
-            {"courtyard",  "Courtyard Trap"}
+            {"courtyard",  "Courtyard Trap"},
+            {"planetrap",  "Plane Trap"},
+            {"fantrap",    "Fan Trap"}
         };
 
         foreach (string trapText in trapData.Values)
@@ -1142,7 +1254,8 @@ shutdown
         "Nacht Hits: " + vars.boxHitsNachtCount.ToString(),
         "Verruckt Hits: " + vars.boxHitsVerrucktCount.ToString(),
         "Rags Slams: " + vars.ragsSlamsCounter.ToString(),
-        "Nade Count: " + vars.nadeCounter.ToString()
+        "Nade Count: " + vars.nadeCounter.ToString(),
+        "Valk Count: " + vars.nadeCounter.ToString()
     };
     File.WriteAllLines(vars.boxHitsFilePath, lines);
 
