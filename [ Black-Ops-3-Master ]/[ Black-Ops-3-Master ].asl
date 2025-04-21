@@ -27,6 +27,8 @@ state("blackops3", "BO3 Steam")
     int currentWeaponID : 0xA50D9C0;
     int BoxWeaponID : 0x195F80B8;
     int animError : 0x51A3814;
+    int HitmarkerAddr : 0xA08B690;
+    int FrameTime : 0x168ED8A8;
 }
 
 state("boiii", "BOIII Client")
@@ -56,6 +58,8 @@ state("boiii", "BOIII Client")
     int LevelNumEnt : "blackops3.exe", 0xA549DF4;
     int currentWeaponID : "blackops3.exe", 0xA50D9C0;
     int BoxWeaponID : "blackops3.exe", 0x195F80B8;
+    int HitmarkerAddr : "blackops3.exe", 0xA08B690;
+    int FrameTime : "blackops3.exe", 0x168ED8A8;
 }
 
 state("boiii_exotick", "BOIII v.1.0.4 Client")
@@ -86,6 +90,8 @@ state("boiii_exotick", "BOIII v.1.0.4 Client")
     int LevelNumEnt : "blackops3.exe", 0xA549DF4;
     int currentWeaponID : "blackops3.exe", 0xA50D9C0;
     int BoxWeaponID : "blackops3.exe", 0x195F80B8;
+    int HitmarkerAddr : "blackops3.exe", 0xA08B690;
+    int FrameTime : "blackops3.exe", 0x168ED8A8;
 }
 
 state("boiii_dirty", "BOIII-Dirty v0.0.1")
@@ -116,6 +122,8 @@ state("boiii_dirty", "BOIII-Dirty v0.0.1")
     int LevelNumEnt : "blackops3.exe", 0xA549DF4;
     int currentWeaponID : "blackops3.exe", 0xA50D9C0;
     int BoxWeaponID : "blackops3.exe", 0x195F80B8;
+    int HitmarkerAddr : "blackops3.exe", 0xA08B690;
+    int FrameTime : "blackops3.exe", 0x168ED8A8;
 }
 
 startup
@@ -130,14 +138,20 @@ startup
     settings.Add("Enable Splits", true);
 
     //Reset Options (Parent Setting)
-    settings.Add("Reset Options", true);
+    settings.Add("Options", true);
 
         //Subcategories for Reset Options
-        settings.Add("Reset Value", false, "Reset Value", "Reset Options");
+        settings.Add("Reset Value", false, "Reset Value", "Options");
         settings.SetToolTip("Reset Value", "Show Raw Reset Values");
 
-        settings.Add("Reset Timer", false, "Reset Timer", "Reset Options");
-        settings.Add("Entities", false, "Entities", "Reset Options");
+        settings.Add("Reset Timer", false, "Reset Timer", "Options");
+        settings.Add("Entities", false, "Entities", "Options");
+
+        settings.Add("com_frametime", false, "com_frametime", "Options");
+        settings.Add("com_frametime_timer", false, "Frame Timer", "Options");
+
+        settings.Add("Darkness", false, "Darkness", "Options");
+            settings.SetToolTip("Darkness", "Show Darkness values");
 
     //Error Tracker
     settings.Add("Errors Trackers", true);
@@ -147,18 +161,17 @@ startup
         settings.Add("Child Client Variable", false, "Child Client Variable", "Errors Trackers");
         settings.Add("G-Spawn", false, "G-Spawn", "Errors Trackers");
 
-
-    //Darkness Timer
-    settings.Add("Darkness", false);
-    settings.SetToolTip("Darkness", "Show Darkness values");
+    
 
     settings.Add("Counters", false);
         settings.Add("Nade Counter", false, "Nade Counter", "Counters");
+        settings.Add("Hitmarker Counter", false, "Hitmarker Counter", "Counters");
+            settings.SetToolTip("Hitmarker Counter", "it's something, to track ZnS Error");
         settings.Add("Rags Slams Counter", false, "Rags Slams Counter", "Counters");
         settings.Add("Valk Counter", false, "Valk Counter", "Counters");
 
     //Box Hits
-    settings.Add("Box Hits", false);
+    settings.Add("Box Hits", false, "Box Hits", "Counters");
         settings.Add("Box Hits Nacht", false, "Box Hits Nacht", "Box Hits");
         settings.Add("Box Hits Verruckt", false, "Box Hits Verruckt", "Box Hits");
         settings.Add("Box Hits Moon", false, "Box Hits Moon", "Box Hits");
@@ -166,6 +179,7 @@ startup
     //settings.Add("Wonder Weapon Average", false); -- Currently not avaiable :/
     
     settings.Add("Clear Counters", false);
+         settings.SetToolTip("Clear Counters", "This will reset all Counters/Box Hits back to 0");
 
     // Trap Timers (Parent Setting)
     settings.Add("Trap Timers", true);
@@ -355,6 +369,8 @@ startup
 
     vars.maxChildValue = 0;
     vars.CSCmaxChildValue = 0;
+
+    vars.hitmarkerCounter = 0;
 }
 
 init
@@ -394,15 +410,16 @@ init
     
     refreshRate = 100;
     
-    if (settings["Trap Timers"] && settings["flogger"])
+    if (settings["Trap Timers"])
     {
         vars.trapStarts = new Dictionary<string, int>();
         foreach (string trapID in new string[] { "bunker", "kinoft", "m8room", "camptrap", "comm", "doc", "fishing", "storage", "flogger", "bridge", "jugtrap", "mkder", "doubletap", "speedcola", "vesper", "kn", "courtyard", "planetrap", "fantrap" })
         {
             vars.trapStarts[trapID] = -2020;
-            vars.FloggertrapStart = -1540;
         }
     }
+
+    vars.FloggertrapStart = -1540;
 
     if (settings["Solo Timer"])
     {
@@ -417,13 +434,15 @@ init
         vars.split_index = 1;
     }
 
-    if (settings["Reset Options"])
+    if (settings["Options"])
     {
         vars.startTime = current.levelTime;
         vars.startReset = current.resetTime;
         vars.elapsedReset = 9999999;
         vars.elapsedTime = 1;
     }
+
+    vars.startFrameTime = current.FrameTime;
 }
 
 update
@@ -438,7 +457,7 @@ update
         vars.trueTime = current.levelTime - vars.fixedOffsetGameTime;
     }
 
-    if (settings["Reset Options"])
+    if (settings["Options"])
     {
         int entityChangeThreshold = 3;
     
@@ -451,17 +470,34 @@ update
             vars.startReset = current.resetTime;
         }
 
-    //Update Reset Value Component (only if setting is enabled)
-    if (settings["Reset Value"])
+    /*if (settings["Reset Value"])
     {
-        vars.resetPerTick = vars.elapsedReset / vars.elapsedTime;
-        vars.ticksLeft = (2147483647.0 - current.resetTime) / vars.resetPerTick;
-        string resetText = current.resetTime.ToString() + " / 2147483647"; //Raw reset time
+        // Calculate how much left until max value (2147483647)
+        long remainingReset = 2147483647L - current.resetTime;
+
+        // Format the number with commas for readability
+        string resetText = string.Format("{0} / 2147483647 ({1})", current.resetTime, remainingReset);
         vars.SetText("Reset:", resetText);
     }
     else
     {
         vars.RemoveText("Reset:");
+    }*/
+
+    // Update Reset Value Component (only if setting is enabled)
+    if (settings["Reset Value"])
+    {
+        // Calculate remaining
+        long remainingReset = 2147483647L - current.resetTime;
+
+        // Set two separate text components
+        vars.SetText("Reset:", string.Format("{0}", current.resetTime) + " / 2147483647" );
+        vars.SetText("Remaining:", string.Format("{0}", remainingReset));
+    }
+    else
+    {
+        vars.RemoveText("Reset:");
+        vars.RemoveText("Remaining:");
     }
 
     if (settings["Entities"])
@@ -472,6 +508,53 @@ update
     else
     {
         vars.RemoveText("Entities:");
+    }
+
+    if (settings["com_frametime"])
+    {
+        string resetText = current.FrameTime.ToString() + " / 2147483647"; //Raw reset time
+        vars.SetText("com_frametime:", resetText);
+    }
+    else
+    {
+        vars.RemoveText("com_frametime:");
+    }
+
+    if (settings["com_frametime_timer"])
+    {
+        // Calculate time remaining until overflow (2147483647 - current value)
+        long remainingTicks = 2147483647L - (long)current.FrameTime;
+
+        // Calculate days, hours, minutes, seconds
+        int days = (int)(remainingTicks / (1000 * 60 * 60 * 24));
+        int hours = (int)((remainingTicks % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        int minutes = (int)((remainingTicks % (1000 * 60 * 60)) / (1000 * 60));
+        int seconds = (int)((remainingTicks % (1000 * 60)) / 1000);
+        int hundredths = (int)((remainingTicks % 1000) / 10); // Get hundredths of a second
+
+        string formattedTime;
+        if (days > 0)
+        {
+            formattedTime = string.Format("{0}d {1}h {2}m {3}s", days, hours, minutes, seconds);
+        }
+        else if (hours > 0)
+        {
+            formattedTime = string.Format("{0}h {1}m {2}s", hours, minutes, seconds);
+        }
+        else if (minutes > 0)
+        {
+            formattedTime = string.Format("{0}m {1}s.{2:D2}", minutes, seconds, hundredths);
+        }
+        else
+        {
+            formattedTime = string.Format("{0}.{1:D2}s", seconds, hundredths);
+        }
+
+        vars.SetText("Frame Timer:", formattedTime);
+    }
+    else
+    {
+        vars.RemoveText("Frame Timer:");
     }
 
     if (settings["Child Server Variable"])
@@ -604,6 +687,22 @@ update
         vars.RemoveText("G-Spawn:");
     }
 
+    if (settings["Hitmarker Counter"])
+    {
+        // Check if the hitmarker address value changed (trigger occurred)
+        if (old.HitmarkerAddr != current.HitmarkerAddr)
+        {
+            vars.hitmarkerCounter++;
+        }
+        
+        // Display the counter value instead of raw address
+        vars.SetText("Hitmarkers:", vars.hitmarkerCounter);
+    }
+    else
+    {
+        vars.RemoveText("Hitmarkers:");
+    }
+
     // Update Rags Slams counter
     if (settings["Rags Slams Counter"])
     {
@@ -644,11 +743,11 @@ update
             vars.valksCounter++; // Increment the counter
         }
 
-        vars.SetText("Valk Kill Counter:", vars.valksCounter);
+        vars.SetText("Valk Counter:", vars.valksCounter);
     }
     else
     {
-        vars.RemoveText("Valk Kill Counter:");
+        vars.RemoveText("Valk Counter:");
     }
 
     //Update Formatted Reset Timer (only if setting is enabled)
@@ -702,15 +801,18 @@ update
 
     //Darkness
     if (settings["Darkness"])
-        {
-            vars.DarknesstrueTime = current.darknessTime - current.fixedoffsetDarkness;
-            string resetText = current.darknessTime.ToString() + " / 4194303"; //Raw reset time
-            vars.SetText("Darkness:", resetText);
-        }
-        else
-        {
-            vars.RemoveText("Darkness:");
-        }
+    {
+        // Calculate how much left until max darkness value (4194303)
+        long remainingDarkness = 4194303L - current.darknessTime;
+
+        // Format the number with commas for readability
+        string darknessText = string.Format("({1})        {0} / 4194303", current.darknessTime, remainingDarkness);
+        vars.SetText("Darkness:", darknessText);
+    }
+    else
+    {
+        vars.RemoveText("Darkness:");
+    }
 
     // Update Box Hits Moon counter
     if (settings["Box Hits Moon"])
@@ -867,6 +969,7 @@ update
         vars.ragsSlamsCounter = 0;
         vars.nadeCounter = 0;
         vars.valksCounter = 0;
+        vars.hitmarkerCounter = 0;
 
         // Clear WW counters
         vars.wwBoxHitsTotal = 0;
@@ -887,6 +990,12 @@ update
             "WW Average: 0"
         };
         File.WriteAllLines(vars.boxHitsFilePath, lines);
+
+        vars.SetText("Counters Cleared! You can uncheck me now!", "");
+    }
+    else
+    {
+        vars.RemoveText("Counters Cleared! You can uncheck me now!");
     }
 
 
@@ -1036,6 +1145,28 @@ gameTime
         "zm_cosmodrome", "zm_temple", "zm_moon", "zm_tomb"
     };
 
+    if (current.currentMap == "zm_cosmodrome")
+    {
+        // Check if we came from cp_frontend (initial load)
+        if (old.currentMap == "core_frontend")
+        {
+            // Initial load - start at -10 seconds
+            if (settings["Solo Timer"])
+            {
+                return new TimeSpan(0, 0, 0, 0, vars.trueTime * 50); // -10.00
+            }
+        }
+        else
+        {
+            // Normal case - start at -5.30
+            if (settings["Solo Timer"])
+            {
+                return new TimeSpan(0, 0, 0, 0, vars.trueTime * 50 + 8000); // -5.30
+            }
+        }
+        return TimeSpan.Zero;
+    }
+
     if (Array.IndexOf(arrayMaps, current.currentMap) == -1 || current.round_counter == 0)
     {
         return TimeSpan.Zero;
@@ -1053,6 +1184,12 @@ start
 {
     if (settings["Coop Timer"])
     {
+        if (current.currentMap == "zm_cosmodrome" && vars.timer_start == 0)
+        {
+            vars.timer_start = 1;
+            return true;
+        }
+        
         if (current.round_counter == 0)
         {
             vars.timer_start = 0;
@@ -1125,22 +1262,25 @@ reset
 exit
 {
     // Reuse the same dictionary mapping for text removals
-    var textRemovals = new Dictionary<string, string>
+    var textRemovals = new Dictionary<string, string[]>
     {
-        {"Reset Value", "Reset:"},
-        {"Entities", "Entities:"},
-        {"Child Server Variable", "Child GSC:"},
-        {"Child Client Variable", "Child CSC:"},
-        {"G-Spawn", "G-Spawn:"},
-        {"Reset Timer", "Reset Timer:"},
-        {"Rags Slams Counter", "Rags Slams Counter:"},
-        {"Nade Counter", "Nade Counter:"},
-        {"Valk Counter", "Valk Kill Counter::"},
-        {"Darkness", "Darkness:"},
-        {"Box Hits Nacht", "Box hits Nacht:"},
-        {"Box Hits Verruckt", "Box hits Verruckt:"},
-        {"Box Hits Moon", "Box hits Moon:"}
-        //{"Wonder Weapon Average", "WW Average:"}
+        {"Reset Value", new string[] {"Reset:", "Remaining:"}},
+        {"Entities", new string[] {"Entities:"}},
+        {"Child Server Variable", new string[] {"Child GSC:"}},
+        {"Child Client Variable", new string[] {"Child CSC:"}},
+        {"G-Spawn", new string[] {"G-Spawn:"}},
+        {"Hitmarker Counter", new string[] {"Hitmarkers:"}},
+        {"Reset Timer", new string[] {"Reset Timer:"}},
+        {"com_frametime", new string[] {"com_frametime:"}},
+        {"com_frametime_timer", new string[] {"Frame Timer:"}},
+        {"Rags Slams Counter", new string[] {"Rags Slams Counter:"}},
+        {"Nade Counter", new string[] {"Nade Counter:"}},
+        {"Valk Counter", new string[] {"Valk Counter:"}},
+        {"Darkness", new string[] {"Darkness:"}},
+        {"Box Hits Nacht", new string[] {"Box hits Nacht:"}},
+        {"Box Hits Verruckt", new string[] {"Box hits Verruckt:"}},
+        {"Box Hits Moon", new string[] {"Box hits Moon:"}},
+        {"Clear Counters", new string[] {"Counters Cleared! You can uncheck me now!"}}
     };
 
     // Process all text removals
@@ -1148,7 +1288,10 @@ exit
     {
         if (settings[item.Key])
         {
-            vars.RemoveText(item.Value);
+            foreach (var text in item.Value)
+            {
+                vars.RemoveText(text);
+            }
         }
     }
 
@@ -1188,23 +1331,25 @@ exit
 shutdown
 {
     // Create a dictionary mapping setting names to their corresponding text labels
-    var textRemovals = new Dictionary<string, string>
+    var textRemovals = new Dictionary<string, string[]>
     {
-        {"Reset Value", "Reset:"},
-        {"Entities", "Entities:"},
-        {"Child Server Variable", "Child GSC:"},
-        {"Child Client Variable", "Child CSC:"},
-        {"G-Spawn", "G-Spawn:"},
-        {"Reset Timer", "Reset Timer:"},
-        {"Rags Slams Counter", "Rags Slams Counter:"},
-        {"Nade Counter", "Nade Counter:"},
-        {"Valk Counter", "Valk Kill Counter::"},
-        {"Darkness", "Darkness:"},
-        {"Box Hits Nacht", "Box hits Nacht:"},
-        {"Box Hits Verruckt", "Box hits Verruckt:"},
-        {"Box Hits Moon", "Box hits Moon:"}
-        //{"Wonder Weapon Average", "WW Average:"}
-        
+        {"Reset Value", new string[] {"Reset:", "Remaining:"}},
+        {"Entities", new string[] {"Entities:"}},
+        {"Child Server Variable", new string[] {"Child GSC:"}},
+        {"Child Client Variable", new string[] {"Child CSC:"}},
+        {"G-Spawn", new string[] {"G-Spawn:"}},
+        {"Hitmarker Counter", new string[] {"Hitmarkers:"}},
+        {"Reset Timer", new string[] {"Reset Timer:"}},
+        {"com_frametime", new string[] {"com_frametime:"}},
+        {"com_frametime_timer", new string[] {"Frame Timer:"}},
+        {"Rags Slams Counter", new string[] {"Rags Slams Counter:"}},
+        {"Nade Counter", new string[] {"Nade Counter:"}},
+        {"Valk Counter", new string[] {"Valk Counter:"}},
+        {"Darkness", new string[] {"Darkness:"}},
+        {"Box Hits Nacht", new string[] {"Box hits Nacht:"}},
+        {"Box Hits Verruckt", new string[] {"Box hits Verruckt:"}},
+        {"Box Hits Moon", new string[] {"Box hits Moon:"}},
+        {"Clear Counters", new string[] {"Counters Cleared! You can uncheck me now!"}}
     };
 
     // Process all text removals
@@ -1212,7 +1357,10 @@ shutdown
     {
         if (settings[item.Key])
         {
-            vars.RemoveText(item.Value);
+            foreach (var text in item.Value)
+            {
+                vars.RemoveText(text);
+            }
         }
     }
 
@@ -1255,7 +1403,8 @@ shutdown
         "Verruckt Hits: " + vars.boxHitsVerrucktCount.ToString(),
         "Rags Slams: " + vars.ragsSlamsCounter.ToString(),
         "Nade Count: " + vars.nadeCounter.ToString(),
-        "Valk Count: " + vars.nadeCounter.ToString()
+        "Valk Count: " + vars.valksCounter.ToString(),
+        "Hitmarkers: " + vars.hitmarkerCounter.ToString()
     };
     File.WriteAllLines(vars.boxHitsFilePath, lines);
 
