@@ -5,7 +5,9 @@ If you encounter any issues, please DM me on Discord: `ojumpy`
 
 # [Download v3.3](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.3/Black-Ops-3-Master.asl)
 
-[DOA Version download v3.3](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.3/Black-Ops-3-Master.DOA.asl)
+### [DOA Version download v3.4](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.4/Black-Ops-3-Master.DOA.asl)
+#### Recommended DOA Splits
+- For optimal functionality with the DOA version, please use the [DOA Splits file](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.4/DOA.Splits.lss). This ensures the timer follows DOA's specific splitting logic. See [Setting up Splits](#setting-up-splits) for installation instructions.
 
 ## Setup
 1. Right Click LiveSplit → Edit Layout → `+` button → Control → Scriptable Auto Splitter → Browse to `Black-Ops-3-Master.asl` and select it.
