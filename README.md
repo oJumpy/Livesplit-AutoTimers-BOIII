@@ -13,7 +13,7 @@ If you encounter any issues, please DM me on Discord: `ojumpy`
 1. Right Click LiveSplit → Edit Layout → `+` button → Control → Scriptable Auto Splitter → Browse to `Black-Ops-3-Master.asl` and select it.
 1. If you want splits, refer to [Setting up Splits](#setting-up-splits) at this point.
 1. Right Click LiveSplit → Compare Against → Select `Game Time`, Look down to where it says: *Best Segments*, *Average Segments*...
-1. If you are using BOIII Client, you need to use a specific version of it, that we allowed for the community. [BOIII: ezz-32-14-g01e6d7f](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v2.2/boiii.exe) 
+1. If you are using BOIII Client, you need to use a specific version of it. [BOIII: ezz-32-14-g01e6d7f](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v2.2/boiii.exe) 
 
 ## Setting up Splits
 - Download [Blank Splits to 255](https://github.com/oJumpy/IW7-Zombies-AutoTimers/releases/download/v1/Blank.to.255.lss).
