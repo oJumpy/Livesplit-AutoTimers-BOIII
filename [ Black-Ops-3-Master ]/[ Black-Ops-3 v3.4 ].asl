@@ -28,10 +28,16 @@ state("blackops3", "BO3 Steam")
     int BoxWeaponID : 0x195F80B8;
     int animError : 0x51A3814;
     int HitmarkerAddr : 0xA08B690;
+    int HitmarkerAddr2 : 0xA08B9C0;
+    int DeadWireAddr : 0x4D5C5C8;
+    int AAtsAddr : 0x1141EBD0;
+    int Turned : 0x49C5730;
+	int Turned2 : 0x49C5780;
     int FrameTime : 0x168ED8A8;
+    int MemTree : 0x50DC280;
 }
 
-state("boiii", "BOIII Client")
+state("boiii", "BOIII Community Client")
 {
     int levelTime : "blackops3.exe", 0xA5502C0;
     int round_counter : "blackops3.exe", 0xA55BDEC;
@@ -59,7 +65,50 @@ state("boiii", "BOIII Client")
     int currentWeaponID : "blackops3.exe", 0xA50D9C0;
     int BoxWeaponID : "blackops3.exe", 0x195F80B8;
     int HitmarkerAddr : "blackops3.exe", 0xA08B690;
+    int HitmarkerAddr2 : "blackops3.exe", 0xA08B9C0;
+    int DeadWireAddr : "blackops3.exe", 0x4D5C5C8;
+    int AAtsAddr : "blackops3.exe", 0x1141EBD0;
+    int Turned : "blackops3.exe", 0x49C5730;
+	int Turned2 : "blackops3.exe", 0x49C5780;
     int FrameTime : "blackops3.exe", 0x168ED8A8;
+    int MemTree : "blackops3.exe", 0x50DC280;
+}
+
+state("boiii", "BOIII EZ Client")
+{
+    int levelTime : "blackops3.exe", 0xA5502C0;
+    int round_counter : "blackops3.exe", 0xA55BDEC;
+    string13 currentMap : "blackops3.exe", 0x940C5E8;
+    byte is_paused : "blackops3.exe", 0x347EE08;
+    int resetTime : "blackops3.exe", 0x176F9358;
+    byte zombie_killed : "blackops3.exe", 0x4A115A8;
+    int darknessTime : "blackops3.exe", 0x10B315E4;
+        int fixedoffsetDarkness : "blackops3.exe", 0x10;
+    int BoxHitsMoon : "blackops3.exe", 0x47CAB3C;
+    int BoxHitsNacht : "blackops3.exe", 0x47CB2E4;
+    int BoxHitsVerruckt1 : "blackops3.exe", 0x47CBF24;
+    int BoxHitsVerruckt2 : "blackops3.exe", 0x47CD61C;
+    int BoxHitsVerruckt3 : "blackops3.exe", 0x47CC3BC;
+    int BoxHitsVerruckt4 : "blackops3.exe", 0x47CC234;
+    int BoxHitsVerruckt5 : "blackops3.exe", 0x47CC0AC;
+    byte36 trapData : "blackops3.exe", 0xA55BDF1;
+    byte flogger : "blackops3.exe", 0x4713774;
+    int entity : "blackops3.exe", 0x176F9B98;
+    int RagsSlams : "blackops3.exe", 0x36751E0;
+    int ValksKill : "blackops3.exe", 0x51A3B38;
+    byte8 childStructPtr : "blackops3.exe", 0x51A3580;
+    byte8 childCSCStructPtr : "blackops3.exe", 0x51A3680;
+    int LevelNumEnt : "blackops3.exe", 0xA549DF4;
+    int currentWeaponID : "blackops3.exe", 0xA50D9C0;
+    int BoxWeaponID : "blackops3.exe", 0x195F80B8;
+    int HitmarkerAddr : "blackops3.exe", 0xA08B690;
+    int HitmarkerAddr2 : "blackops3.exe", 0xA08B9C0;
+    int DeadWireAddr : "blackops3.exe", 0x4D5C5C8;
+    int AAtsAddr : "blackops3.exe", 0x1141EBD0;
+    int Turned : "blackops3.exe", 0x49C5730;
+	int Turned2 : "blackops3.exe", 0x49C5780;
+    int FrameTime : "blackops3.exe", 0x168ED8A8;
+    int MemTree : "blackops3.exe", 0x50DC280;
 }
 
 state("boiii_exotick", "BOIII v.1.0.4 Client")
@@ -91,6 +140,11 @@ state("boiii_exotick", "BOIII v.1.0.4 Client")
     int currentWeaponID : "blackops3.exe", 0xA50D9C0;
     int BoxWeaponID : "blackops3.exe", 0x195F80B8;
     int HitmarkerAddr : "blackops3.exe", 0xA08B690;
+    int HitmarkerAddr2 : "blackops3.exe", 0xA08B9C0;
+    int DeadWireAddr : "blackops3.exe", 0x4D5C5C8;
+    int AAtsAddr : "blackops3.exe", 0x1141EBD0;
+    int Turned : "blackops3.exe", 0x49C5730;
+	int Turned2 : "blackops3.exe", 0x49C5780;
     int FrameTime : "blackops3.exe", 0x168ED8A8;
 }
 
@@ -123,6 +177,11 @@ state("boiii_dirty", "BOIII-Dirty v0.0.1")
     int currentWeaponID : "blackops3.exe", 0xA50D9C0;
     int BoxWeaponID : "blackops3.exe", 0x195F80B8;
     int HitmarkerAddr : "blackops3.exe", 0xA08B690;
+    int HitmarkerAddr2 : "blackops3.exe", 0xA08B9C0;
+    int DeadWireAddr : "blackops3.exe", 0x4D5C5C8;
+    int AAtsAddr : "blackops3.exe", 0x1141EBD0;
+    int Turned : "blackops3.exe", 0x49C5730;
+	int Turned2 : "blackops3.exe", 0x49C5780;
     int FrameTime : "blackops3.exe", 0x168ED8A8;
 }
 
@@ -159,6 +218,7 @@ startup
         //Subcategories for Reset Options
         settings.Add("Child Server Variable", false, "Child Server Variable", "Errors Trackers");
         settings.Add("Child Client Variable", false, "Child Client Variable", "Errors Trackers");
+        settings.Add("MemTree", false, "MemTree", "Errors Trackers");
         settings.Add("G-Spawn", false, "G-Spawn", "Errors Trackers");
 
     
@@ -369,8 +429,14 @@ startup
 
     vars.maxChildValue = 0;
     vars.CSCmaxChildValue = 0;
+    vars.MemMAXTreeValue = 0;
 
     vars.hitmarkerCounter = 0;
+    // In the startup section, add these new variables:
+    vars.totalHitmarkers = 0;
+    vars.trueHitmarkers = 0;
+    vars.deadWireActivations = 0;
+    vars.turnedActivations = 0;
 }
 
 init
@@ -390,8 +456,12 @@ init
                 version = "BO3 Steam";
                 break;
 
+            case "89704049A6E097564A8F717BBF4ACE7E":
+                version = "BOIII Community Client";
+                break;
+
             case "14378716061897CBEB24D74007DD4178":
-                version = "BOIII Client";
+                version = "BOIII EZ Client";
                 break;
 
             case "F735CF4A04B61B019912737343068087":
@@ -677,6 +747,26 @@ update
         vars.RemoveText("Child CSC:");
     }
 
+    if (settings["MemTree"])
+    {
+        if (current.levelTime == 0)
+        {
+            vars.MemMAXTreeValue = 0;
+        }
+
+        if (current.MemTree > vars.MemMAXTreeValue)
+            {
+                vars.MemMAXTreeValue = current.MemTree;
+            }
+
+        string resetText = current.MemTree.ToString() + " Max: " + vars.MemMAXTreeValue.ToString() + " / 130000";
+        vars.SetText("MemTree:", resetText);
+    }
+    else
+    {
+        vars.RemoveText("MemTree:");
+    }
+
     if (settings["G-Spawn"])
     {
         string resetText = current.LevelNumEnt.ToString() + " / 1022"; //Raw reset time
@@ -688,20 +778,41 @@ update
     }
 
     if (settings["Hitmarker Counter"])
+{
+    // Track all hitmarker activations (both regular and AATs)
+    if (old.HitmarkerAddr != current.HitmarkerAddr)
     {
-        // Check if the hitmarker address value changed (trigger occurred)
-        if (old.HitmarkerAddr != current.HitmarkerAddr)
-        {
-            vars.hitmarkerCounter++;
-        }
-        
-        // Display the counter value instead of raw address
-        vars.SetText("Hitmarkers:", vars.hitmarkerCounter);
+        vars.totalHitmarkers++;
     }
-    else
+    if (old.HitmarkerAddr2 != current.HitmarkerAddr2)
     {
-        vars.RemoveText("Hitmarkers:");
+        vars.totalHitmarkers++;
     }
+
+    // Detect Dead Wire activations (value changes to 117768207)
+    if (old.DeadWireAddr != current.DeadWireAddr && current.DeadWireAddr == 117768207)
+    {
+        vars.deadWireActivations++;
+    }
+
+    // Detect Turned activations (value changes to 1852994900)
+    if ((old.Turned != current.Turned && current.Turned == 1852994900) || 
+        (old.Turned2 != current.Turned2 && current.Turned2 == 1852994900))
+    {
+        vars.turnedActivations++;
+    }
+
+    // Calculate true hitmarkers by subtracting AATs activations
+    vars.trueHitmarkers = vars.totalHitmarkers - (vars.deadWireActivations + vars.turnedActivations);
+
+    // Display both total and true hitmarkers
+    vars.SetText("Hitmarkers:", 
+        string.Format("Total: {0} | True: {1}", vars.totalHitmarkers, vars.trueHitmarkers));
+}
+else
+{
+    vars.RemoveText("Hitmarkers:");
+}
 
     // Update Rags Slams counter
     if (settings["Rags Slams Counter"])
@@ -806,7 +917,7 @@ update
         long remainingDarkness = 4194303L - current.darknessTime;
 
         // Format the number with commas for readability
-        string darknessText = string.Format("({1})        {0} / 4194303", current.darknessTime, remainingDarkness);
+        string darknessText = string.Format("({1}) {0} / 4194303", current.darknessTime, remainingDarkness);
         vars.SetText("Darkness:", darknessText);
     }
     else
@@ -991,11 +1102,11 @@ update
         };
         File.WriteAllLines(vars.boxHitsFilePath, lines);
 
-        vars.SetText("Counters Cleared! You can uncheck me now!", "");
+        vars.SetText("Counters Cleared! You can uncheck me!", "");
     }
     else
     {
-        vars.RemoveText("Counters Cleared! You can uncheck me now!");
+        vars.RemoveText("Counters Cleared! You can uncheck me!");
     }
 
 
@@ -1153,7 +1264,7 @@ gameTime
             // Initial load - start at -10 seconds
             if (settings["Solo Timer"])
             {
-                return new TimeSpan(0, 0, 0, 0, vars.trueTime * 50); // -10.00
+                return new TimeSpan(0, 0, 0, 0, vars.trueTime * 50 + 8000); // -5.30
             }
         }
         else
@@ -1161,7 +1272,7 @@ gameTime
             // Normal case - start at -5.30
             if (settings["Solo Timer"])
             {
-                return new TimeSpan(0, 0, 0, 0, vars.trueTime * 50 + 8000); // -5.30
+                return new TimeSpan(0, 0, 0, 0, vars.trueTime * 50 + 7650); // -5.30
             }
         }
         return TimeSpan.Zero;
@@ -1268,6 +1379,7 @@ exit
         {"Entities", new string[] {"Entities:"}},
         {"Child Server Variable", new string[] {"Child GSC:"}},
         {"Child Client Variable", new string[] {"Child CSC:"}},
+        {"MemTree", new string[] {"MemTree:"}},
         {"G-Spawn", new string[] {"G-Spawn:"}},
         {"Hitmarker Counter", new string[] {"Hitmarkers:"}},
         {"Reset Timer", new string[] {"Reset Timer:"}},
@@ -1280,7 +1392,7 @@ exit
         {"Box Hits Nacht", new string[] {"Box hits Nacht:"}},
         {"Box Hits Verruckt", new string[] {"Box hits Verruckt:"}},
         {"Box Hits Moon", new string[] {"Box hits Moon:"}},
-        {"Clear Counters", new string[] {"Counters Cleared! You can uncheck me now!"}}
+        {"Clear Counters", new string[] {"Counters Cleared! You can uncheck me!"}}
     };
 
     // Process all text removals
@@ -1337,6 +1449,7 @@ shutdown
         {"Entities", new string[] {"Entities:"}},
         {"Child Server Variable", new string[] {"Child GSC:"}},
         {"Child Client Variable", new string[] {"Child CSC:"}},
+        {"MemTree", new string[] {"MemTree:"}},
         {"G-Spawn", new string[] {"G-Spawn:"}},
         {"Hitmarker Counter", new string[] {"Hitmarkers:"}},
         {"Reset Timer", new string[] {"Reset Timer:"}},
@@ -1349,7 +1462,7 @@ shutdown
         {"Box Hits Nacht", new string[] {"Box hits Nacht:"}},
         {"Box Hits Verruckt", new string[] {"Box hits Verruckt:"}},
         {"Box Hits Moon", new string[] {"Box hits Moon:"}},
-        {"Clear Counters", new string[] {"Counters Cleared! You can uncheck me now!"}}
+        {"Clear Counters", new string[] {"Counters Cleared! You can uncheck me!"}}
     };
 
     // Process all text removals
