@@ -3,7 +3,7 @@ A multi-functional LiveSplit script for Call of Duty: Black Ops 3 Zombies.
 
 If you encounter any issues, please DM me on Discord: `ojumpy`
 
-# [Download v3.3](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.3/Black-Ops-3-Master.asl)
+# [Download v3.3](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.7/Black-Ops-3_v3.7.asl)
 
 ### [DOA Version download v3.4](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.4/Black-Ops-3-Master.DOA.asl)
 #### Recommended DOA Splits
@@ -13,7 +13,7 @@ If you encounter any issues, please DM me on Discord: `ojumpy`
 1. Right Click LiveSplit → Edit Layout → `+` button → Control → Scriptable Auto Splitter → Browse to `Black-Ops-3-Master.asl` and select it.
 1. If you want splits, refer to [Setting up Splits](#setting-up-splits) at this point.
 1. Right Click LiveSplit → Compare Against → Select `Game Time`, Look down to where it says: *Best Segments*, *Average Segments*...
-1. If you are using BOIII Client, you need to use a specific version of it. [BOIII Community v1.0.0](https://github.com/oJumpy/BOIII-Client-Community/releases/download/v1.0.0/boiii.exe) 
+1. If you are using BOIII Client, you need to use a specific version of it. [BOIII Community v1.0.6](https://gitlab.com/-/project/69497495/uploads/94f9b379b53f97979f69847a61d1a97d/boiii.exe) 
 
 ## Setting up Splits
 - Download [Blank Splits to 255](https://github.com/oJumpy/IW7-Zombies-AutoTimers/releases/download/v1/Blank.to.255.lss).
