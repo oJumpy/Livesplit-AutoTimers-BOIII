@@ -1,7 +1,7 @@
 # Livesplit-AutoTimers-BOIII
 A multi-functional LiveSplit script for Call of Duty: Black Ops 3 Zombies.
 
-# [Download v3.9](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.9/Black-Ops-3_v3.9.asl)
+# [Download v4.0](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v4.0/Black-Ops-3_v4.0.asl)
 
 ### [DOA Version download v3.4](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v3.4/Black-Ops-3-Master.DOA.asl)
 #### Recommended DOA Splits
