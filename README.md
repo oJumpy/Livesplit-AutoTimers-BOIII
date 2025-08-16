@@ -21,6 +21,7 @@ A multi-functional LiveSplit script for Call of Duty: Black Ops 3 Zombies.
 ## AutoSplitter Recommendations
 - [LiveSplit Components](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/V3.0/Useful.zip)
 - [My Layout](https://github.com/oJumpy/IW7-Zombies-AutoTimers/releases/download/v1/recommended_layout.lsl)
+- [Useful stuff, like round times in solo, 2p, 3p and 4p](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/V3.0/Useful.zip)
 
 ![image](https://github.com/user-attachments/assets/bc4814cd-a41c-4bf2-96f1-f2672858ae19)
 
