@@ -1,4 +1,4 @@
-# [Download v4.0](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v4.0/Black-Ops-3_v4.0.asl)
+# [Download v4.1](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v4.1/Black-Ops-3_v4.1.asl)
 
 # Livesplit-AutoTimers-BOIII
 A multi-functional LiveSplit script for Call of Duty: Black Ops 3 Zombies.
