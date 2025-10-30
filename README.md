@@ -1,4 +1,4 @@
-# [Download v4.2-Beta](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v4.1/Black-Ops-3_v4.1.asl)
+# [Download v4.2-Beta](https://github.com/oJumpy/Livesplit-AutoTimers-BOIII/releases/download/v4.2-Beta/Black-Ops-3_v4.2-Beta.asl)
 # 4.2 BETA VERSION
 
 - Fixed main layout saving issue: Resolved the problem where saving layouts with certain settings enabled would cause duplicate Text components and timer size issues.
