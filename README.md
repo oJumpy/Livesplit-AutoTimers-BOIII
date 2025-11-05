@@ -23,7 +23,8 @@ A multi-functional LiveSplit script for Call of Duty: Black Ops 3 Zombies.
 1. Right Click LiveSplit → Edit Layout → `+` button → Control → Scriptable Auto Splitter → Browse to `Black-Ops-3-Master.asl` and select it.
 
    <img width="171" height="408" alt="image" src="https://github.com/user-attachments/assets/6c73bba6-de80-47d0-baf6-23e54746fb8e" />
-   <img width="546" height="350" alt="image" src="https://github.com/user-attachments/assets/832a68df-83eb-4fef-aab9-a1ae60cd28ff" />
+   <img width="546" height="352" alt="image" src="https://github.com/user-attachments/assets/a2646ab6-2bc3-42c2-aaff-b701996d242b" />
+
 
 
 3. If you want splits, refer to [Setting up Splits](#setting-up-splits) at this point.
